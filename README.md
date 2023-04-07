@@ -13,7 +13,7 @@ According to the **lemma 1.5** that is detailedy proven the algorithm must stop 
 ![image](https://user-images.githubusercontent.com/65178946/230637725-4fa2a6e7-53f4-4b11-a64e-38b2ab376368.png)
 
 ## About the Implementation:
-Apart from the code beeing available inside of the repository it is also **available** as a collaboration session in the following link: **[replit-sfikasteo](https://replit.com/join/crhukhrgol-sfikasteo)**. Inside the repository there is also a **video file** with a example step by step execution.  
+Apart from the code beeing available inside of the repository it is also **available** as a collaboration session in the following link: **[replit-sfikasteo](https://replit.com/join/crhukhrgol-sfikasteo)**. Inside the repository there is also a **video file** with am example step by step execution.  
 Some quick guidelines for the execution:
 * Compilation can be done using the configured makefile. Executing the code is as simple as ./packageRouting.
 * In the begging the number of nodes will be asked, An **integer** value should be given through *stdin*.
