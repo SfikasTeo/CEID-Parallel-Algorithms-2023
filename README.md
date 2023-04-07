@@ -1,7 +1,7 @@
 ## Introduction: 
 As a part of the course: "**Parallel Algorithms**" from the *[University of Patras](https://www.upatras.gr/en/)* and the Department of *[Computer Engineering and Informatics](https://www.ceid.upatras.gr/en/)*    
 We will showcase a parallel algorithm described in the book "**[Introduction to Parallel Algorithms and Architectures](https://www.elsevier.com/books/introduction-to-parallel-algorithms-and-architectures/leighton/978-1-4832-0772-8)**" written by [F. Thomson Leighton](https://en.wikipedia.org/wiki/F._Thomson_Leighton).   
-We will focus on a simple implementation of a **greedy parallel package routing problem on a linear topology** under the .       
+We will focus on a simple implementation of a **greedy parallel package routing problem on a linear topology** under the chapter *1.7.1*.       
 For the simulation of the problem we will mainly be using **[c++](https://en.wikipedia.org/wiki/C++)**, while the parallel enviroment will be simulated with the help of threads *(nodes)* and the **[openmp](https://www.openmp.org/) API**.   
   
 ## About the Algorithm:
