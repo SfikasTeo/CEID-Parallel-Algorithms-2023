@@ -15,7 +15,7 @@ According to the **lemma 1.5** that is detailedy proven the algorithm must stop 
 ## About the Implementation:
 Apart from the code beeing available inside of the repository it is also **available** as a collaboration session in the following link: **[replit-sfikasteo](https://replit.com/join/crhukhrgol-sfikasteo)**. Inside the repository there is also a **video file** with am example step by step execution.  
 Some quick guidelines for the execution:
-* Compilation can be done using the configured makefile `make`. Executing the code is as simple as `./packageRouting`
+* Compilation can be done using the configured makefile from the shell: `make`. Executing the code is as simple as `./packageRouting`
 * In the begging the number of nodes will be asked, An **integer** value should be given through *stdin*.
 * The nodes will be executing in parallel, in the first step of the algorithm each node will ask for its initial packages.
   * **Interger** values should be given: *0 < value < N*, signifying the **destination** node. **Any** value outside these boundaries will signify that we wish to stop inserting packages in the node.
