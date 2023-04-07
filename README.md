@@ -22,4 +22,6 @@ Some quick guidelines for the execution:
   * Leaving a node **initially** empty of packages is possible by inserting any *destination* value outside of the boundaries ( -1 is an example value ).
   * Inserting a package in any node *j*, that is destined for node *j* will automatically be resolved.
 * Due to the random scheduling of threads, **no** two executions will provide the output messages in the **same order**, but all will provide the **same result**.
+https://user-images.githubusercontent.com/65178946/230641534-7a2f7ae6-cd6e-4d40-ae28-c9b564c0364a.mp4
+
 
