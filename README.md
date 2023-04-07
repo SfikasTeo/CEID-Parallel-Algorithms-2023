@@ -8,7 +8,7 @@ For the simulation of the problem we will mainly be using **[c++](https://en.wik
 The algorithms is described in chapter: *1.7.1 Greedy Algorithms* in leighton's book.  
 In summary we will focus on ways of routing the correct information and pacakges between the nodes of specific topologies and architectures.
 We will consider a **linear topology** of **N** nodes, in which exists an arbitrary amount of packages in each node, each destined for different nodes in the architecture.
-In each step of the algorithm from each node, one package can be transmitted in each direction. In case of **more than one** packages contesting for the **same** edge and direction of the network, the rule of "*Furthest first contetion resolution*" will be followed. Meaning that the package with the furthest nodes left to travesrse will be deemed as the **priority package**.  
+In each step of the algorithm, from each node one package can be transmitted in each direction. In case of **more than one** packages contesting for the **same** edge and direction of the network, the rule of "*Furthest first contetion resolution*" will be followed. Meaning that the package with the furthest nodes left to travesrse will be deemed as the **priority package**.  
 According to the **lemma 1.5** that is detailedy proven the algorithm must stop in **O(N-1) steps**.
 ![image](https://user-images.githubusercontent.com/65178946/230637725-4fa2a6e7-53f4-4b11-a64e-38b2ab376368.png)
 
