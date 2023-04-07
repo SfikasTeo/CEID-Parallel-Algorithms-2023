@@ -5,7 +5,7 @@ We will focus on a simple implementation of a **greedy parallel package routing 
 For the simulation of the problem we will mainly be using **[c++](https://en.wikipedia.org/wiki/C++)**, while the parallel enviroment will be simulated with the help of threads *(nodes)* and the **[openmp](https://www.openmp.org/) API**.   
   
 ## About the Algorithm:
-The algorithms is described in chapter: *1.7.1 Greedy Algorithms* of leighton's book.  
+The algorithms is described in chapter: *1.7.1 Greedy Algorithms* in leighton's book.  
 In summary we will focus on ways of routing the correct information and pacakges between the nodes of specific topologies and architectures.
 We will consider a **linear topology** of **N** nodes, in which exists an arbitrary amount of packages in each node, each destined for different nodes in the architecture.
 In each step of the algorithm from each node, one package can be transmitted in each direction. In case of **more than one** packages contesting for the **same** edge and direction of the network, the rule of "*Furthest first contetion resolution*" will be followed. Meaning that the package with the furthest nodes left to travesrse will be deemed as the **priority package**.  
