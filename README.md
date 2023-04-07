@@ -19,7 +19,7 @@ Some quick guidelines for the execution:
 * In the begging the number of nodes will be asked, An **integer** value should be given through *stdin*.
 * The nodes will be executing in parallel, in the first step of the algorithm each node will ask for its initial packages.
   * **Interger** values should be given: *0 < value < N*, signifying the **destination** node. **Any** value outside these boundaries will signify that we wish to stop inserting packages in the node.
-  * Leaving a node **initially** empty of packages is possible by inserting any *destination* value outside of the boundaries ( -1 is an example value ).
+  * Leaving a node **initially** empty of packages is possible by inserting any *destination* value outside of the boundaries *( -1 for example )*.
   * Inserting a package in any node *j*, that is destined for node *j* will automatically be resolved.
 * Due to the random scheduling of threads, **no** two executions will provide the output messages in the **same order**, but all will provide the **same result**.   
 
