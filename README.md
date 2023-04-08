@@ -17,10 +17,9 @@ In each step of the algorithm, from each node one packet can be transmitted in e
 * **Compilation** can be done using the configured makefile from the shell: `make` **or** by the command: `g++ -O3 -std=c++11 -lstdc++ -fopenmp packetRouting.cpp`.
 * **Executing** the code is as simple as `./packetRouting`.
 * At the begging the number of nodes *(N)* will be asked. An **integer** value should be given via *stdin*.
-* In the next step, nodes will **not** be always be shown in the **same order**, due to the random thread scheduling.
-* The nodes will be executing in parallel, in the first step of the algorithm each node will ask for its initial packets.
-  * **Interger** values should be given: *0 < value < N*, showing the **destination** node. Any value out of this range implies that we wish to stop adding packets to the node. Where *N* is the number of nodes.
-  * Leaving a node with no packets is possible by setting the input value to any destination value out of the range: *value<N or value<1 (e.g., -1)*.       Where *N* is the number of nodes.
+* In the next step, nodes will **not** always be be shown in the **same order**, due to the random thread scheduling. The nodes *(threads)* are executing in parallel. During the initalization of the algorithm each node will ask for its initial packets:
+  * An **Interger** value should be given: *0 < value < N*, showing the **destination** node. Any value out of this range implies that we wish to stop adding packets to the node. Where *N* is the number of nodes.
+  * Leaving a node with no packets is possible by setting the **first** input value to any destination value out of the range: *value<N or value<1 (e.g., -1)*. Where *N* is the number of nodes.
   * Inserting a packet in any node *j*, that is destined for node *j* will automatically be resolved.
 * Due to the random scheduling of threads *(the different nodes)*, **no** two executions will provide the output messages in the **same order**, but all will provide the **same result**.   
 
