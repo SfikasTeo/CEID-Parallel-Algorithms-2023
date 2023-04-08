@@ -7,10 +7,10 @@ ifeq ($(debug), 1)
 	CXXFLAGS+=-DDEBUG
 endif
 
-all: packageRouting
+all: packetRouting
 
-packageRouting: packageRouting.cpp
+packetRouting: packetRouting.cpp
 	$(CXX) $(CXXFLAGS) -o  $@ $<
 
 clean:
-	rm -f packageRouting *.txt
+	rm -f packetRouting *.txt

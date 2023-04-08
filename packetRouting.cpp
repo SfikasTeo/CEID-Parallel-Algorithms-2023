@@ -5,17 +5,17 @@
 
 // ----------------- Generic Guide lines -----------------
 
-// - Compile with: g++ -O3 -Wall -std=c++11 -lstdc++ -fopenmp packageRouting.cpp 
+// - Compile with: g++ -O3 -Wall -std=c++11 -lstdc++ -fopenmp packetRouting.cpp 
 // - Or use the makefile: make.
 // - OPENMP: Run with: ./executable_name
 
 // ----------------- Introdution -----------------
 
 // N = number of nodes
-// M = number of packages
+// M = number of packets
 
 // Openmp will be used to simulate the network of N nodes
-// Each node will have a double ended priority queue of packages
+// Each node will have a double ended priority queue of packets
 // to be sent to the neighboring nodes.
 
 // Each step will be simulated according to the instructions of 
@@ -24,21 +24,21 @@
 // In each step One packet may be sent from each node in each direction.
 // The edge contention is resolved by the nodes with the furthest distance.
 // Scheduling will follow the "furthest first contention resolution" protocol.
-// We are following a greedy approach to the routing of the packages.
+// We are following a greedy approach to the routing of the packets.
 
-// Packages will be simulated as a single integer denoting the package number.
+// packets will be simulated as a single integer denoting the packet number.
 // A more proper simulation could involve a custom structured datatype
-// Packages for each node will be given by the user.
+// packets for each node will be given by the user.
 
 // We will implement a generalized form of the algorithm without the restrictions
-// of the starting number of packages per node = 1 ( Of course 1 package per node
-// is possible). More than two packages also can 
+// of the starting number of packets per node = 1 ( Of course 1 packet per node
+// is possible). More than two packets also can 
 // contend for the same network edge. As illustrated in the example figure 1.9 and 
 // pages 157-159 of Leighton's book. 
 
 // ----------------- Auxilliary Definitions -----------------
 
-int num_active_packages = 0; // Variable for counting packages
+int num_active_packets = 0; // Variable for counting packets
 int num_threads; // Total number of nodes
 
 // Structure of double-ended priority queue
@@ -100,18 +100,18 @@ void printQueue(struct DoubleEndedPriorityQueue Queue) {
 	std::cout << std::endl;
 }
 
-void addPackages(struct DoubleEndedPriorityQueue &Queue, int node_id) {
-	std::cout << "Node: ["<< node_id <<"] "<< " Insert new packages, by their destination nodes ( 0..N-1 ). Add -1 to exit"  << std::endl;
-	int package = node_id;
+void addpackets(struct DoubleEndedPriorityQueue &Queue, int node_id) {
+	std::cout << "Node: ["<< node_id <<"] "<< " Insert new packets, by their destination nodes ( 0..N-1 ). Add -1 to exit"  << std::endl;
+	int packet = node_id;
 	while (1) {
-		std::cout << "New Package destined for node: ";
-		std::cin >> package;
-		if (package == node_id  || package < 0 || package >= num_threads)
+		std::cout << "New packet destined for node: ";
+		std::cin >> packet;
+		if (packet == node_id  || packet < 0 || packet >= num_threads)
 			break;
 
-		Queue.insert(package);
+		Queue.insert(packet);
 		#pragma omp atomic
-		num_active_packages++;
+		num_active_packets++;
 	}
 }
 
@@ -126,9 +126,9 @@ int main(int argc, char **argv) {
 
 	int step; // Variable for counting steps
 	
-	// Allocate memory for the transferrence of packages
-	int *left_transmitted_packages = (int *)malloc((num_threads) * sizeof(int));
-	int *right_transmitted_packages = (int *)malloc((num_threads) * sizeof(int));
+	// Allocate memory for the transferrence of packets
+	int *left_transmitted_packets = (int *)malloc((num_threads) * sizeof(int));
+	int *right_transmitted_packets = (int *)malloc((num_threads) * sizeof(int));
 
 	// Initialize the network of nodes
 	#pragma omp parallel
@@ -139,77 +139,77 @@ int main(int argc, char **argv) {
 		// Initialize a priority queue for each node
 		struct DoubleEndedPriorityQueue nodeQueue;
 		
-		// Add packages to the queue
+		// Add packets to the queue
 		#pragma omp critical
 		{
-			addPackages(nodeQueue, node_id);
+			addpackets(nodeQueue, node_id);
 		}
 		// Syncronize the nodes
 		#pragma omp barrier
 
-		// Initialize the variables for the transferrence of packages
-		int left_received_package = -1;
-		int right_received_package = -1;
+		// Initialize the variables for the transferrence of packets
+		int left_received_packet = -1;
+		int right_received_packet = -1;
 
 		// Initialize the algorithm of Greedy routing in a linear topology
-		// In each step each node will send a package to the left and to the right
+		// In each step each node will send a packet to the left and to the right
 		// The edge contention is resolved by the nodes with the furthest distance
 
-		while(num_active_packages){
+		while(num_active_packets){
 			#pragma omp single
 			{
 				std::cout << "-------------- Step: " << ++step << " --------------" << std::endl;
 			}
 			
 			// Exmplaining the logic of the following code: 
-			// Send the package with the smallest value to the left node if value is smaller than rank
-			// Send the package with the largest value to the right node if value is larger than rank
+			// Send the packet with the smallest value to the left node if value is smaller than rank
+			// Send the packet with the largest value to the right node if value is larger than rank
 			
-			// Send package with smallest value to the left node
-			left_transmitted_packages[node_id] = (!nodeQueue.isEmpty() && (nodeQueue.getMin() < node_id))?nodeQueue.popMin():-1;
-			// Send package with largest value to the right node
-			right_transmitted_packages[node_id] = (!nodeQueue.isEmpty() && (nodeQueue.getMax() > node_id))?nodeQueue.popMax():-1;
+			// Send packet with smallest value to the left node
+			left_transmitted_packets[node_id] = (!nodeQueue.isEmpty() && (nodeQueue.getMin() < node_id))?nodeQueue.popMin():-1;
+			// Send packet with largest value to the right node
+			right_transmitted_packets[node_id] = (!nodeQueue.isEmpty() && (nodeQueue.getMax() > node_id))?nodeQueue.popMax():-1;
 
 			// Syncronize the nodes
 			#pragma omp barrier
 			
-			// Receive packages from the left nodes	
-			if ( (node_id != 0) && right_transmitted_packages[node_id-1] != -1 ) {
-				left_received_package = right_transmitted_packages[node_id-1];
-				if ( left_received_package != node_id ) {
-					nodeQueue.insert(left_received_package);
+			// Receive packets from the left nodes	
+			if ( (node_id != 0) && right_transmitted_packets[node_id-1] != -1 ) {
+				left_received_packet = right_transmitted_packets[node_id-1];
+				if ( left_received_packet != node_id ) {
+					nodeQueue.insert(left_received_packet);
 					#pragma omp critical
 					{
-						std::cout << "Node: ["<< node_id <<"] "<< " Received package from node: [" << node_id-1 << "] destined for node: [" << left_received_package << "]" << std::endl;
+						std::cout << "Node: ["<< node_id <<"] "<< " Received packet from node: [" << node_id-1 << "] destined for node: [" << left_received_packet << "]" << std::endl;
 					}
 				}
 				else {
 					#pragma omp critical
 					{
-						std::cout << "Node: ["<< node_id <<"] "<< " Package was delivered from node: [" << node_id-1 << "]" << std::endl;
+						std::cout << "Node: ["<< node_id <<"] "<< " packet was delivered from node: [" << node_id-1 << "]" << std::endl;
 					}
 					#pragma omp atomic
-					num_active_packages--;
+					num_active_packets--;
 				}
 			}
 
-			// Receive packages from the right nodes
-			if ( (node_id != num_threads-1) && left_transmitted_packages[node_id+1] != -1 ) {
-				right_received_package = left_transmitted_packages[node_id+1];
-				if ( right_received_package != node_id ) {
-					nodeQueue.insert(right_received_package);
+			// Receive packets from the right nodes
+			if ( (node_id != num_threads-1) && left_transmitted_packets[node_id+1] != -1 ) {
+				right_received_packet = left_transmitted_packets[node_id+1];
+				if ( right_received_packet != node_id ) {
+					nodeQueue.insert(right_received_packet);
 					#pragma omp critical
 					{
-						std::cout << "Node: ["<< node_id <<"] "<< " Received package from node: [" << node_id+1 << "] destined for node: [" << right_received_package << "]" << std::endl;
+						std::cout << "Node: ["<< node_id <<"] "<< " Received packet from node: [" << node_id+1 << "] destined for node: [" << right_received_packet << "]" << std::endl;
 					}
 				}
 				else {
 					#pragma omp critical
 					{
-						std::cout << "Node: ["<< node_id <<"] "<< " Package was delivered from node: [" << node_id+1 << "]" << std::endl;
+						std::cout << "Node: ["<< node_id <<"] "<< " packet was delivered from node: [" << node_id+1 << "]" << std::endl;
 					}
 					#pragma omp atomic
-					num_active_packages--;
+					num_active_packets--;
 				}
 			}
 
