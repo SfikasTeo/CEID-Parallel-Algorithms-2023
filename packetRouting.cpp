@@ -101,13 +101,16 @@ void printQueue(struct DoubleEndedPriorityQueue Queue) {
 }
 
 void addpackets(struct DoubleEndedPriorityQueue &Queue, int node_id) {
-	std::cout << "Node: ["<< node_id <<"] "<< " Insert new packets, by their destination nodes ( 0..N-1 ). Add -1 to exit"  << std::endl;
+	std::cout << "Node: ["<< node_id+1 <<"] "<< " Insert new packets, by their destination nodes ( 1..N ). Add -1 to exit"  << std::endl;
 	int packet = node_id;
 	while (1) {
 		std::cout << "New packet destined for node: ";
 		std::cin >> packet;
-		if (packet == node_id  || packet < 0 || packet >= num_threads)
+		--packet;
+		if ( packet < 0 || packet >= num_threads)
 			break;
+		if (packet == node_id)
+			continue;
 
 		Queue.insert(packet);
 		#pragma omp atomic
@@ -180,13 +183,13 @@ int main(int argc, char **argv) {
 					nodeQueue.insert(left_received_packet);
 					#pragma omp critical
 					{
-						std::cout << "Node: ["<< node_id <<"] "<< " Received packet from node: [" << node_id-1 << "] destined for node: [" << left_received_packet << "]" << std::endl;
+						std::cout << "Node: ["<< node_id+1 <<"] "<< " Received packet from node: [" << node_id << "] destined for node: [" << left_received_packet+1 << "]" << std::endl;
 					}
 				}
 				else {
 					#pragma omp critical
 					{
-						std::cout << "Node: ["<< node_id <<"] "<< " packet was delivered from node: [" << node_id-1 << "]" << std::endl;
+						std::cout << "Node: ["<< node_id+1 <<"] "<< " packet was delivered from node: [" << node_id+1 << "]" << std::endl;
 					}
 					#pragma omp atomic
 					num_active_packets--;
@@ -200,13 +203,13 @@ int main(int argc, char **argv) {
 					nodeQueue.insert(right_received_packet);
 					#pragma omp critical
 					{
-						std::cout << "Node: ["<< node_id <<"] "<< " Received packet from node: [" << node_id+1 << "] destined for node: [" << right_received_packet << "]" << std::endl;
+						std::cout << "Node: ["<< node_id+1 <<"] "<< " Received packet from node: [" << node_id+2 << "] destined for node: [" << right_received_packet+1 << "]" << std::endl;
 					}
 				}
 				else {
 					#pragma omp critical
 					{
-						std::cout << "Node: ["<< node_id <<"] "<< " packet was delivered from node: [" << node_id+1 << "]" << std::endl;
+						std::cout << "Node: ["<< node_id+1 <<"] "<< " packet was delivered from node: [" << node_id+2 << "]" << std::endl;
 					}
 					#pragma omp atomic
 					num_active_packets--;
