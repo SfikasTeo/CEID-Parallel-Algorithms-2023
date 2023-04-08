@@ -1,6 +1,6 @@
 ## Introduction: 
 As a part of the course: "**Parallel Algorithms**" from the *[University of Patras](https://www.upatras.gr/en/)* and the Department of *[Computer Engineering and Informatics](https://www.ceid.upatras.gr/en/)*    
-We will showcase a parallel algorithm described in the book "**[Introduction to Parallel Algorithms and Architectures](https://www.elsevier.com/books/introduction-to-parallel-algorithms-and-architectures/leighton/978-1-4832-0772-8)**" authored by [F. Thomson Leighton](https://en.wikipedia.org/wiki/F._Thomson_Leighton).   
+We will showcase a parallel algorithm described in the book "**[Introduction to Parallel Algorithms and Architectures](https://www.elsevier.com/books/introduction-to-parallel-algorithms-and-architectures/leighton/978-1-4832-0772-8)**" authored by [F. Thomson Leighton](https://people.csail.mit.edu/ftl/).   
 We will focus on a simple implementation of a **greedy parallel packet routing problem on a linear topology** as described in chapter *1.7.1*.       
 For the implementation of the algorithm we will mainly be using **[c++](https://en.wikipedia.org/wiki/C++)**, while the parallel enviroment will be created with the help of threads *(nodes)* and the **[openmp](https://www.openmp.org/) API**.   
   
@@ -17,7 +17,7 @@ In each step of the algorithm, from each node one packet can be transmitted in e
 * **Compilation** can be done using the configured makefile from the shell: `make` **or** by the command: `g++ -O3 -std=c++11 -lstdc++ -fopenmp packetRouting.cpp`.
 * **Executing** the code is as simple as `./packetRouting`.
 * At the begging the number of nodes *(N)* will be asked. An **integer** value should be given via *stdin*.
-* In the next step, nodes will **not** always be be shown in the **same order**, due to the random thread scheduling. The nodes *(threads)* are executing in parallel. During the initalization of the algorithm each node will ask for its initial packets:
+* In the next step, packets must be input to network nodes. Please note that due to the random thread scheduling, nodes to be populated with packets also appear in **random** order (i.e., **not** necessarily following their rank in the linear array):
   * An **Interger** value should be given: *0 < value < N*, showing the **destination** node. Any value out of this range implies that we wish to stop adding packets to the node. Where *N* is the number of nodes.
   * Leaving a node with no packets is possible by setting the **first** input value to any destination value out of the range: *value<N or value<1 (e.g., -1)*. Where *N* is the number of nodes.
   * Inserting a packet in any node *j*, that is destined for node *j* will automatically be resolved.
