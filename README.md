@@ -14,7 +14,8 @@ In each step of the algorithm, from each node one packet can be transmitted in e
 ## About the Implementation:
  The code in addition to being available inside the repository, is also **available** as a collaboration session at the following online collaborative programming platform: **[replit-sfikasteo](https://replit.com/join/crhukhrgol-sfikasteo)**. Inside the repository there is also a **video file** with with an indicative step-by-step execution.  
 ### Some quick guidelines for the execution:
-* **Compilation** can be done using the configured makefile from the shell: `make` or by `g++ -O3 -std=c++11 -lstdc++ -fopenmp packetRouting.cpp`.   **Executing** the code is as simple as `./packetRouting`.
+* **Compilation** can be done using the configured makefile from the shell: `make` **or** by the command: `g++ -O3 -std=c++11 -lstdc++ -fopenmp packetRouting.cpp`.
+* **Executing** the code is as simple as `./packetRouting`.
 * At the begging the number of nodes *(N)* will be asked. An **integer** value should be given via *stdin*.
 * In the next step, nodes will **not** be always be shown in the **same order**, due to the random thread scheduling.
 * The nodes will be executing in parallel, in the first step of the algorithm each node will ask for its initial packets.
