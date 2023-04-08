@@ -1,6 +1,6 @@
 ## Introduction: 
-As a part of the course: "**Parallel Algorithms**" from the *[University of Patras](https://www.upatras.gr/en/)* and the Department of *[Computer Engineering and Informatics](https://www.ceid.upatras.gr/en/)*    
-We will showcase a parallel algorithm described in the book "**[Introduction to Parallel Algorithms and Architectures](https://www.elsevier.com/books/introduction-to-parallel-algorithms-and-architectures/leighton/978-1-4832-0772-8){:target="_blank"}.**" authored by [F. Thomson Leighton](https://people.csail.mit.edu/ftl/).   
+As a part of the course: "**Parallel Algorithms**" from the <a href="https://www.upatras.gr/en/" target="_blank">University of Patras</a> and the Department of *[Computer Engineering and Informatics](https://www.ceid.upatras.gr/en/)*    
+We will showcase a parallel algorithm described in the book "**[Introduction to Parallel Algorithms and Architectures](https://www.elsevier.com/books/introduction-to-parallel-algorithms-and-architectures/leighton/978-1-4832-0772-8)**" authored by [F. Thomson Leighton](https://people.csail.mit.edu/ftl/).   
 We will focus on a simple implementation of a **greedy parallel packet routing problem on a linear topology** as described in chapter *1.7.1*.       
 For the implementation of the algorithm we will mainly be using **[c++](https://en.wikipedia.org/wiki/C++)**, while the parallel enviroment will be created with the help of threads *(nodes)* and the **[openmp](https://www.openmp.org/) API**.   
   
