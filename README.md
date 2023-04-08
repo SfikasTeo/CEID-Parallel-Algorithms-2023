@@ -6,10 +6,9 @@ For the implementation of the algorithm we will mainly be using **[c++](https://
   
 ## About the Algorithm:
 The algorithms is described in chapter: *1.7.1 Greedy Algorithms* in leighton's book.  
-In summary we will focus on a way of routing the correct information and packets between the nodes of specific topologies and architectures.
-We will consider a **linear topology** of **N** nodes, in which exists an arbitrary amount of packets in each node, each destined for different nodes in the architecture.
-In each step of the algorithm, from each node one packet can be transmitted in each direction. In case of **more than one** packets contesting for the **same** edge and direction of the network, the rule of "*Furthest first contetion resolution*" will be followed. Meaning that the packet having to travel the longest distance will be deemed as the **priority packet**.  
-According to the **lemma 1.5** that is detailedy proven the algorithm must stop in **O(N-1) steps**.
+In summary we will focus on a way of routing the correct information and packets between the nodes of a linear topology.
+We will consider a **linear topology** of **N** nodes, in which exists just one packet in each node, each destined for different nodes in the architecture.
+In each step of the algorithm, from each node one packet can be transmitted in each direction. 
 ![image](https://user-images.githubusercontent.com/65178946/230637725-4fa2a6e7-53f4-4b11-a64e-38b2ab376368.png)
 
 ## About the Implementation:
